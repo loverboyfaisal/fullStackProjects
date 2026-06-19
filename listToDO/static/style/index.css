@@ -1,0 +1,51 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+.container-fluid {
+    justify-content: center;
+    align-items: center;
+}
+
+.row.sticky-top {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    /* border: black solid; */
+    border: none;
+}
+
+.row {
+    /* border: solid black; */
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.col-4 {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.btn {
+    /* display: flex; */
+    background-color: rgb(255, 0, 0);
+}
+
+.col-8 {
+    /* border: solid black; */
+    box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.4);
+}
+
+.table.table-striped {
+    font-weight: bold;
+}
