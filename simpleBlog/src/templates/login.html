@@ -30,9 +30,15 @@ content%}
                         type="password"
                         id="inputPassword5"
                         class="form-control"
+                        placeholder="Input your password"
                         aria-describedby="passwordHelpBlock"
                         required
                     />
+                    {%if msg%}
+                    <div class="container-fluid mt-3 text-center">
+                        <div class="alert alert-danger">{{msg}}</div>
+                    </div>
+                    {%endif%}
                 </div>
                 <div align="center">
                     <input

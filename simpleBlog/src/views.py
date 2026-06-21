@@ -1,10 +1,12 @@
 # Import bluebrint
 from flask import Blueprint,render_template
+from flask_login import login_required,current_user
 # Create bluebrint instance
 views = Blueprint("views",__name__)
 
 
 @views.route("/home")
 @views.route("/")
+@login_required
 def home():
-    return render_template('home.html',name="ahmed")
+    return render_template('home.html',name=current_user.user_name)
