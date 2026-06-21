@@ -1,2 +1,67 @@
-{% extends "base.html" %} {% block title %} home {% endblock %} {% block
-content%} {% endblock %}
+{% extends "base.html" %} {% block title %} SignUp {% endblock %} {% block
+content%}
+
+<div class="row mt-5">
+    <p class="h1" align="center">Signup</p>
+</div>
+<form action="" method="post">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-4 col-lg-6">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label"
+                        >Email address</label
+                    >
+                    <input
+                        type="email"
+                        class="form-control"
+                        id="exampleFormControlInput1"
+                        placeholder="name@example.com"
+                        required
+                    />
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label"
+                        >Username</label
+                    >
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="user_name"
+                        placeholder="input user name"
+                        required
+                    />
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label"
+                        >password</label
+                    >
+                    <input
+                        type="password"
+                        class="form-control"
+                        id="user_name"
+                        placeholder="input password"
+                        required
+                    />
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label"
+                        >password confirm</label
+                    >
+                    <input
+                        type="password"
+                        class="form-control"
+                        id="user_name"
+                        placeholder="input password again"
+                        required
+                    />
+                </div>
+            </div>
+            <div align="center">
+                <input type="submit" class="btn btn-primary" value="signup" />
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
