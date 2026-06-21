@@ -11,8 +11,8 @@ def login():
     if request.method == "GET":
         return render_template('login.html')
     if request.method == "POST":
-        usr_input_email = request.values.get("usr_input_email")
-        usr_input_password = request.values.get("usr_input_password")
+        usr_input_email = request.values.get("user_input_email")
+        usr_input_password = request.values.get("user_input_password")
         user_exist = User.get_by_email(usr_input_email)
         if user_exist:
             password_hash = user_exist.user_password
