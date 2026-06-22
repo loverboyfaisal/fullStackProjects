@@ -51,6 +51,28 @@ class User(UserMixin):
         return None
     
 
+def fetch_post(user_id):
+    db = mysql_connection()
+    curr = db.cursor(dictionary=True)
+
+    query = "select * from posts where user_id = %s"
+    curr.execute(query,(user_id,))
+    curr.fetchone()
+    
+    curr.close()
+    db.close()
+
+def create_post(user_id,post_content):
+    db = mysql_connection()
+    curr = db.cursor(buffered=True)
+
+    query = "insert into posts (user_id,post_content) values (%s,%s)"
+    curr.execute(query,(user_id,post_content))
+    db.commit()
+
+    curr.close()
+    db.close()
+
 
 def create_blog_db():
     db = mysql_connection()

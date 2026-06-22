@@ -1,8 +1,8 @@
 # Import bluebrint
-from flask import Blueprint,render_template,request,redirect,url_for,jsonify
+from flask import Blueprint,render_template,request,redirect,url_for
 from src.models import User,create_user
 from werkzeug.security import check_password_hash,generate_password_hash
-from flask_login import login_user,logout_user,current_user,login_required
+from flask_login import login_user,logout_user,current_user
 # Create bluebrint instance
 auth = Blueprint("auth",__name__)
 
@@ -25,7 +25,7 @@ def login():
         else:
             return render_template('login.html',msg="user is not exist")
 
-
+    return render_template('login.html',msg="user is not exist",)
 
 
 @auth.route('/sign_up',methods=["GET", "POST"])
