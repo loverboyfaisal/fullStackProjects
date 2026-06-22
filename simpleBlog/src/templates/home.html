@@ -1,2 +1,18 @@
 {% extends "base.html" %} {% block title %} home {% endblock %} {% block
-content%} {% endblock %}
+content%}
+
+<div class="container mt-5" align="center">
+    <p class="h1 border-1">Hello {{current_user.user_name}}</p>
+</div>
+
+{%for post in posts%}
+<div class="card mt-3">
+    <div class="card-header">I will add post header inside create post</div>
+    <div class="card-body">
+        <h5 class="card-title">{{post.post_content}}</h5>
+        <p class="card-text small">Author: {{current_user.user_name}}</p>
+        <a href="#" class="link small">Author</a>
+    </div>
+</div>
+
+{%endfor%} {% endblock %}

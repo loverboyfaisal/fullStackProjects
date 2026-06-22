@@ -1,3 +1,4 @@
+from flask import jsonify
 from src import mysql_connection
 from flask_login import UserMixin
 
@@ -51,16 +52,19 @@ class User(UserMixin):
         return None
     
 
-def fetch_post(user_id):
+def fetch_post():
     db = mysql_connection()
     curr = db.cursor(dictionary=True)
 
-    query = "select * from posts where user_id = %s"
-    curr.execute(query,(user_id,))
-    curr.fetchone()
-    
+    query = "select * from posts"
+    curr.execute(query)
+    rows = curr.fetchall()
+
     curr.close()
     db.close()
+
+    return rows
+    
 
 def create_post(user_id,post_content):
     db = mysql_connection()

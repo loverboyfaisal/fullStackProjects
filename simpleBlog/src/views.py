@@ -9,8 +9,15 @@ views = Blueprint("views",__name__)
 @views.route("/")
 @login_required
 def home():
-    return render_template('home.html',name=current_user.user_name,user=current_user)
+    from src.models import fetch_post
+    posts = fetch_post()
+    return render_template('home.html',posts=posts)
 
+# @views.route('/fetchposts')
+# def fetchposts():
+#     from src.models import fetch_post
+#     posts = fetch_post()
+#     return posts
 
 
 @views.route('/createpost',methods=["GET","POST"])
@@ -24,3 +31,4 @@ def create_post():
         from src.models import create_post
         create_post(current_user.id,post_content)
     return render_template('createpost.html')
+
