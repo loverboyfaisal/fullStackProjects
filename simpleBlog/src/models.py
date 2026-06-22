@@ -56,7 +56,7 @@ def fetch_post():
     db = mysql_connection()
     curr = db.cursor(dictionary=True)
 
-    query = "select * from posts"
+    query = "select post_id,user_id,user_name as username,post_content,data_publish from posts inner join users on users.id = posts.user_id;"
     curr.execute(query)
     rows = curr.fetchall()
 
@@ -72,6 +72,17 @@ def create_post(user_id,post_content):
 
     query = "insert into posts (user_id,post_content) values (%s,%s)"
     curr.execute(query,(user_id,post_content))
+    db.commit()
+
+    curr.close()
+    db.close()
+
+def deletepost(post_id):
+    db = mysql_connection()
+    curr = db.cursor(buffered=True)
+
+    query = "delete from posts where post_id = %s"
+    curr.execute(query,(post_id,))
     db.commit()
 
     curr.close()

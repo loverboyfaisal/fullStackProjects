@@ -1,6 +1,7 @@
 # Import bluebrint
-from flask import Blueprint,render_template,request
+from flask import Blueprint,render_template,request,jsonify
 from flask_login import login_required,current_user
+from src.models import create_post,fetch_post
 # Create bluebrint instance
 views = Blueprint("views",__name__)
 
@@ -9,7 +10,6 @@ views = Blueprint("views",__name__)
 @views.route("/")
 @login_required
 def home():
-    from src.models import fetch_post
     posts = fetch_post()
     return render_template('home.html',posts=posts)
 
@@ -28,7 +28,8 @@ def create_post():
         return render_template('createpost.html')
     if request.method == "POST":
         post_content = request.values.get("user_input_post_content")
-        from src.models import create_post
         create_post(current_user.id,post_content)
     return render_template('createpost.html')
 
+# @views.route('/deletepost',methods=["POST"])
+# def deletepost():

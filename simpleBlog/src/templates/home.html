@@ -7,12 +7,27 @@ content%}
 
 {%for post in posts%}
 <div class="card mt-3">
-    <div class="card-header">I will add post header inside create post</div>
+    <div class="btn-group btn-sm ms-auto" algin="left">
+        <button
+            type="button"
+            class="btn btn-secondary dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+        >
+            ⋮
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+                <button class="dropdown-item" id="delete_post" type="button">
+                    delete post
+                </button>
+            </li>
+        </ul>
+    </div>
     <div class="card-body">
         <h5 class="card-title">{{post.post_content}}</h5>
-        <p class="card-text small">Author: {{current_user.user_name}}</p>
+        <p class="card-text small">Author: {{post.username}}</p>
         <a href="#" class="link small">Author</a>
     </div>
 </div>
-
 {%endfor%} {% endblock %}
