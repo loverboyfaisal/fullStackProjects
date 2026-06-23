@@ -1,4 +1,3 @@
-from flask import jsonify
 from src import mysql_connection
 from flask_login import UserMixin
 
@@ -66,7 +65,36 @@ def fetch_post():
     return rows
     
 
-def create_post(user_id,post_content):
+def delete_post_byid(post_id):
+    db = mysql_connection()
+    curr = db.cursor(dictionary=True)
+
+    query = """
+    delete from posts where post_id = %s;
+    """
+    curr.execute(query,(post_id,))
+    db.commit()
+
+    curr.close()
+    db.close() 
+
+def get_post_byid(post_id):
+    db = mysql_connection()
+    curr = db.cursor(dictionary=True)
+
+    query = """
+    select post_id,user_id,user_name as post_author,post_content,data_publish from posts inner join users on users.id = posts.user_id where posts.post_id = %s;
+    """
+    curr.execute(query,(post_id,))
+    row = curr.fetchone()
+
+    curr.close()
+    db.close()
+
+    return row
+
+
+def create_new_post(user_id,post_content):
     db = mysql_connection()
     curr = db.cursor(buffered=True)
 

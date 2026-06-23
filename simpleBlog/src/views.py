@@ -1,7 +1,7 @@
 # Import bluebrint
-from flask import Blueprint,render_template,request,jsonify
+from flask import Blueprint,render_template,request,jsonify,redirect,url_for,flash
 from flask_login import login_required,current_user
-from src.models import create_post,fetch_post
+from src.models import create_new_post,fetch_post,delete_post_byid,get_post_byid
 # Create bluebrint instance
 views = Blueprint("views",__name__)
 
@@ -28,8 +28,23 @@ def create_post():
         return render_template('createpost.html')
     if request.method == "POST":
         post_content = request.values.get("user_input_post_content")
-        create_post(current_user.id,post_content)
+        create_new_post(current_user.id,post_content)
     return render_template('createpost.html')
 
-# @views.route('/deletepost',methods=["POST"])
-# def deletepost():
+from flask import flash, redirect, url_for
+
+@views.route('/deletepost/<id>')
+@login_required
+def deletepost(id):
+    post = get_post_byid(id)
+    if post:
+        if post.get('post_author') == current_user.user_name:
+            delete_post_byid(id)
+            flash('Post deleted successfully!', 'success')  # Green alert
+            return redirect(url_for('views.home'))
+        else:
+            flash('You are not the author of this post', 'danger')  # Red alert
+            return redirect(url_for('views.home'))
+    
+    flash('Post not found', 'warning')  # Yellow alert
+    return redirect(url_for('views.home'))

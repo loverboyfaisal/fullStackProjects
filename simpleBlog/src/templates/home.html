@@ -1,16 +1,32 @@
 {% extends "base.html" %} {% block title %} home {% endblock %} {% block
-content%}
+content%} {% with messages = get_flashed_messages(with_categories=true) %} {% if
+messages %} {% for category, message in messages %}
+<div class="container mt-3">
+    <div
+        class="alert alert-{{ category }} alert-dismissible fade show"
+        role="alert"
+    >
+        {{ message }}
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+        ></button>
+    </div>
+</div>
+{% endfor %} {% endif %} {% endwith %}
 
 <div class="container mt-5" align="center">
-    <p class="h1 border-1">Hello {{current_user.user_name}}</p>
+    <p class="h1 border-1">Wellcome {{current_user.user_name}}</p>
 </div>
-
 {%for post in posts%}
 <div class="card mt-3">
+    {% if current_user.user_name == post.username%}
     <div class="btn-group btn-sm ms-auto" algin="left">
         <button
             type="button"
-            class="btn btn-secondary dropdown-toggle"
+            class="btn dropdown-toggle"
             data-bs-toggle="dropdown"
             aria-expanded="false"
         >
@@ -19,11 +35,16 @@ content%}
         <ul class="dropdown-menu dropdown-menu-end">
             <li>
                 <button class="dropdown-item" id="delete_post" type="button">
-                    delete post
+                    <a
+                        href="/deletepost/{{post.post_id}}"
+                        class="list-group-item text-danger"
+                        >Delete post</a
+                    >
                 </button>
             </li>
         </ul>
     </div>
+    {%endif%}
     <div class="card-body">
         <h5 class="card-title">{{post.post_content}}</h5>
         <p class="card-text small">Author: {{post.username}}</p>
