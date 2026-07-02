@@ -89,14 +89,10 @@ def deletecomment(comment_id):
         com_exist = get_comment_byid(comment_id)
 
         if com_exist:
-            # try:
-                post_id = com_exist.get("post_id")
-                delete_comment(com_exist.get("com_id"))
-                flash("Comment have been deleted","success")
-                return redirect(url_for("views.view_comments",post_id=post_id))
-            # except:
-            #     flash("Error...","warning")
-            #     return redirect(url_for("views.view_comments",post_id=post_id))
+            post_id = com_exist.get("post_id")
+            delete_comment(com_exist.get("com_id"))
+            flash("Comment have been deleted","success")
+            return redirect(url_for("views.view_comments",post_id=post_id))
         else:
             flash("Comment is not exists")
             return redirect(url_for("views.view_comments",post_id=post_id))
